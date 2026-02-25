@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Letters from Friends — jabeenaa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .letters-section{
+      background:linear-gradient(135deg,rgba(255,231,243,0.6),rgba(199,206,234,0.4));
+      border-radius:16px;
+      padding:16px;
+      margin-top:24px;
+      border:2px dashed rgba(255,209,221,0.3)
+    }
+    .letter-input{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:16px
+    }
+    textarea{
+      width:100%;
+      min-height:100px;
+      padding:12px;
+      border-radius:10px;
+      border:2px solid rgba(255,209,221,0.3);
+      font-family:'Poppins',Arial,sans-serif;
+      font-size:13px;
+      resize:vertical;
+      transition:all 0.3s ease
+    }
+    textarea:focus{
+      outline:none;
+      border-color:#ff6ba6;
+      box-shadow:0 0 12px rgba(255,183,213,0.2)
+    }
+    .letter-name-input{
+      padding:8px 12px;
+      border-radius:8px;
+      border:2px solid rgba(255,209,221,0.3);
+      font-family:'Poppins',Arial,sans-serif;
+      font-size:13px;
+      transition:all 0.3s ease
+    }
+    .letter-name-input:focus{
+      outline:none;
+      border-color:#ff6ba6;
+      box-shadow:0 0 8px rgba(255,183,213,0.2)
+    }
+    .submit-btn{
+      background:linear-gradient(90deg,#ffb7d5,#ffd8ea);
+      border:none;
+      color:#5a2140;
+      padding:10px 16px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:13px;
+      transition:all 0.3s ease;
+      width:100%
+    }
+    .submit-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 16px rgba(255,183,213,0.3)
+    }
+    .letters-list{margin-top:20px}
+    .letter-box{
+      background:linear-gradient(135deg,#fff7fb,#fffaf7);
+      border-left:4px solid #ff6ba6;
+      padding:14px;
+      border-radius:8px;
+      margin-bottom:12px;
+      box-shadow:0 2px 8px rgba(90,43,74,0.08);
+      animation:slideIn 0.4s ease
+    }
+    .letter-from{
+      font-weight:700;
+      color:#ff6ba6;
+      font-size:12px;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:0.5px
+    }
+    .letter-text{
+      color:#5a4a5a;
+      font-size:13px;
+      line-height:1.6;
+      font-style:italic
+    }
+    @keyframes slideIn{
+      from{opacity:0;transform:translateX(-10px)}
+      to{opacity:1;transform:translateX(0)}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <h1 class="name">Letters from Friends 💌</h1>
+      <p class="subtitle">Heartfelt messages from people who love you</p>
+      
+      <div class="letters-section">
+        <h3 style="color:#5a2b4a;margin-bottom:12px;font-weight:600">Add Your Message</h3>
+        <div class="letter-input">
+          <input type="text" id="fromName" class="letter-name-input" placeholder="Your name">
+          <textarea id="letterText" placeholder="Write a sweet message for Jabeenaa..."></textarea>
+          <button class="submit-btn" id="submitBtn">Send Letter 💝</button>
+        </div>
+        
+        <div class="letters-list" id="lettersList"></div>
+      </div>
+      
+      <div style="text-align:center;margin-top:28px">
+        <a class="btn" href="practice.html">← Back to Home</a>
+      </div>
+    </section>
+  </main>
+  
+  <script>
+    const STORAGE_KEY = 'jabeenaa_letters';
+    const listEl = document.getElementById('lettersList');
+    const fromNameEl = document.getElementById('fromName');
+    const letterTextEl = document.getElementById('letterText');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    function loadLetters(){
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    }
+    
+    function saveLetters(letters){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(letters));
+    }
+    
+    function render(){
+      const letters = loadLetters();
+      listEl.innerHTML = '';
+      if(letters.length === 0){
+        listEl.innerHTML = '<p style="color:#9a7a9a;text-align:center;font-style:italic">No letters yet — be the first to send one! 💝</p>';
+        return;
+      }
+      letters.forEach(letter => {
+        const div = document.createElement('div');
+        div.className = 'letter-box';
+        div.innerHTML = `<div class="letter-from">From ${letter.from}</div><div class="letter-text">"${letter.text}"</div>`;
+        listEl.appendChild(div);
+      });
+    }
+    
+    submitBtn.addEventListener('click', () => {
+      const from = fromNameEl.value.trim();
+      const text = letterTextEl.value.trim();
+      
+      if(!from || !text){
+        alert('Please fill in both name and message!');
+        return;
+      }
+      
+      const letters = loadLetters();
+      letters.unshift({from, text});
+      saveLetters(letters);
+      
+      fromNameEl.value = '';
+      letterTextEl.value = '';
+      render();
+      
+      // Show confetti
+      const conf = document.createElement('div');
+      conf.className = 'confetti';
+      conf.style.left = '50%';
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 1600);
+    });
+    
+    render();
+  </script>
+</body>
+</html>

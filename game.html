@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pop Balloons — jabeenaa</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .game-area{
+      height:380px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#fff 0%,#fff8fb 100%);
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 4px 12px rgba(90,43,74,0.08);
+      border:2px solid rgba(255,209,221,0.2)
+    }
+    .balloon{
+      position:absolute;
+      border-radius:999px;
+      padding:10px 16px;
+      background:linear-gradient(135deg,#ffd1dc,#ff9fc3);
+      color:#6b2a40;
+      font-weight:700;
+      cursor:pointer;
+      user-select:none;
+      font-size:32px;
+      transition:all 0.2s ease;
+      box-shadow:0 4px 12px rgba(255,157,195,0.3)
+    }
+    .balloon:hover{transform:scale(1.1)}
+    .score{
+      font-weight:700;
+      color:#5a2b4a;
+      font-size:16px
+    }
+    .pop-message{
+      position:fixed;
+      pointer-events:none;
+      font-size:18px;
+      font-weight:700;
+      color:#ff6ba6;
+      text-shadow:0 2px 4px rgba(255,183,213,0.3);
+      animation:popFade 2s ease-out forwards;
+      z-index:9999
+    }
+    @keyframes popFade{
+      0%{opacity:1;transform:translateY(0) scale(1)}
+      100%{opacity:0;transform:translateY(-60px) scale(0.8)}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <h1 class="name">Pop Balloons</h1>
+      <p class="subtitle">Click balloons to pop them — try to pop as many as you can!</p>
+      <div class="game-area" id="gameArea"></div>
+      <div style="display:flex;gap:12px;align-items:center;justify-content:center;margin-top:12px">
+        <div class="score">Score: <span id="score">0</span></div>
+        <button id="start" class="btn primary">Start</button>
+        <a class="btn" href="practice.html">Back</a>
+      </div>
+    </section>
+  </main>
+  <script>
+    const area = document.getElementById('gameArea');
+    const scoreEl = document.getElementById('score');
+    let score=0, interval;
+    
+    const messages = [
+      '💕 I love you!',
+      '❤️ You mean the world to me',
+      '💖 Forever friends!',
+      '✨ I adore you!',
+      '💝 You\'re my best friend',
+      '🌹 I cherish our memories',
+      '💕 Always here for you',
+      '❤️ You\'re irreplaceable',
+      '💖 Love you so much!',
+      '✨ You make me smile'
+    ];
+
+    function showMessage(x, y){
+      const msg = document.createElement('div');
+      msg.className = 'pop-message';
+      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+      msg.style.left = x + 'px';
+      msg.style.top = y + 'px';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 2000);
+    }
+
+    function spawnBalloon(){
+      const b = document.createElement('div');
+      b.className='balloon';
+      b.textContent='🎈';
+      const size = 40 + Math.random()*40;
+      b.style.width = size + 'px';
+      b.style.height = size + 'px';
+      b.style.left = Math.random() * (area.clientWidth - size) + 'px';
+      b.style.top = area.clientHeight + 'px';
+      area.appendChild(b);
+      const rise = 6000 + Math.random()*4000;
+      const start = performance.now();
+
+      function frame(t){
+        const p = (t-start)/rise;
+        if(p>=1){ b.remove(); return }
+        b.style.top = (area.clientHeight - p*(area.clientHeight + size)) + 'px';
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+
+      b.addEventListener('click', ()=>{
+        score++; scoreEl.textContent=score; 
+        const rect = b.getBoundingClientRect();
+        showMessage(rect.left, rect.top);
+        b.remove();
+        const conf = document.createElement('div'); conf.className='confetti'; conf.style.left=b.style.left; document.body.appendChild(conf); setTimeout(()=>conf.remove(),1600);
+      });
+    }
+
+    document.getElementById('start').addEventListener('click', ()=>{
+      score=0; scoreEl.textContent=0; clearInterval(interval); interval=setInterval(spawnBalloon,700);
+      // stop after 20s
+      setTimeout(()=>{ clearInterval(interval) },20000);
+    });
+  </script>
+</body>
+</html>

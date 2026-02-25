@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fun Facts About You — jabeenaa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .facts-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+      max-width:700px;
+      margin:20px auto;
+      z-index:1;
+      position:relative
+    }
+    .fact-card{
+      background:linear-gradient(135deg,#fff7fb,#fff0fb);
+      border:2px solid rgba(255,209,221,0.4);
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 6px 16px rgba(255,183,213,0.15);
+      transition:all 0.3s ease;
+      position:relative;
+      overflow:hidden
+    }
+    .fact-card::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      right:-50%;
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle,rgba(255,209,221,0.1),transparent);
+      pointer-events:none
+    }
+    .fact-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 12px 24px rgba(255,183,213,0.25);
+      border-color:rgba(255,183,213,0.6)
+    }
+    .fact-number{
+      font-family:'Dancing Script',serif;
+      font-size:32px;
+      color:#ff6ba6;
+      font-weight:700;
+      margin-bottom:8px
+    }
+    .fact-title{
+      font-weight:600;
+      color:#5a2b4a;
+      margin-bottom:6px;
+      font-size:15px
+    }
+    .fact-desc{
+      font-size:13px;
+      color:#6b6b6b;
+      line-height:1.6;
+      position:relative;
+      z-index:1
+    }
+    @media(max-width:640px){
+      .facts-grid{grid-template-columns:1fr;gap:12px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <h1 class="name">Fun Facts About You 🌟</h1>
+      <p class="subtitle">Things that make you absolutely amazing</p>
+      
+      <div class="facts-grid">
+        <div class="fact-card">
+          <div class="fact-number">01</div>
+          <div class="fact-title">Your Laugh</div>
+          <div class="fact-desc">Is contagious and makes everyone around you smile instantly</div>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-number">02</div>
+          <div class="fact-title">Your Heart</div>
+          <div class="fact-desc">Is pure, kind, and full of unconditional love for everyone</div>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-number">03</div>
+          <div class="fact-title">Your Strength</div>
+          <div class="fact-desc">Inspires people around you to be better versions of themselves</div>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-number">04</div>
+          <div class="fact-title">Your Loyalty</div>
+          <div class="fact-desc">Is unmatched — you stand by those you love fiercely</div>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-number">05</div>
+          <div class="fact-title">Your Dreams</div>
+          <div class="fact-desc">Are big, beautiful, and absolutely worth chasing</div>
+        </div>
+        
+        <div class="fact-card">
+          <div class="fact-number">06</div>
+          <div class="fact-title">Your Spirit</div>
+          <div class="fact-desc">Is vibrant, creative, and full of endless potential</div>
+        </div>
+      </div>
+      
+      <div style="text-align:center;margin-top:28px">
+        <a class="btn" href="practice.html">← Back to Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Timeline — jabeenaa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .timeline{
+      position:relative;
+      max-width:600px;
+      margin:20px auto;
+      padding:20px;
+      z-index:1
+    }
+    .timeline::before{
+      content:'';
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      width:3px;
+      height:100%;
+      background:linear-gradient(180deg,#ffb7d5,#c7ceea);
+      border-radius:2px
+    }
+    .timeline-item{
+      margin-bottom:30px;
+      position:relative;
+      padding:0 20px
+    }
+    .timeline-item:nth-child(odd){text-align:right;padding-right:55%}
+    .timeline-item:nth-child(even){padding-left:55%}
+    .timeline-content{
+      background:linear-gradient(135deg,#fff7fb,#fff0fb);
+      padding:16px;
+      border-radius:12px;
+      border:2px solid rgba(255,209,221,0.4);
+      box-shadow:0 4px 12px rgba(255,183,213,0.15);
+      transition:all 0.3s ease
+    }
+    .timeline-content:hover{
+      box-shadow:0 8px 20px rgba(255,183,213,0.25);
+      border-color:rgba(255,183,213,0.6)
+    }
+    .timeline-dot{
+      position:absolute;
+      left:50%;
+      top:8px;
+      transform:translateX(-50%);
+      width:16px;
+      height:16px;
+      background:linear-gradient(135deg,#ffb7d5,#ff9fc3);
+      border:3px solid #fff;
+      border-radius:50%;
+      box-shadow:0 0 0 4px rgba(255,183,213,0.3);
+      z-index:2
+    }
+    .timeline-year{
+      font-family:'Dancing Script',serif;
+      font-size:20px;
+      color:#ff6ba6;
+      font-weight:700;
+      margin-bottom:4px
+    }
+    .timeline-title{
+      color:#5a2b4a;
+      font-weight:600;
+      font-size:14px;
+      margin-bottom:4px
+    }
+    .timeline-desc{
+      font-size:13px;
+      color:#6b6b6b;
+      line-height:1.5
+    }
+    @media(max-width:640px){
+      .timeline::before{left:20px}
+      .timeline-item{padding:0 20px 0 50px;text-align:left !important}
+      .timeline-item:nth-child(odd){padding-right:20px;padding-left:50px}
+      .timeline-dot{left:20px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <h1 class="name">Our Timeline 💖</h1>
+      <p class="subtitle">Years of friendship, memories, and love</p>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">3rd Class</div>
+            <div class="timeline-title">The Beginning</div>
+            <div class="timeline-desc">It all started here — an unlikely friendship that would last forever</div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">Middle School</div>
+            <div class="timeline-title">Growing Closer</div>
+            <div class="timeline-desc">Late night talks, inside jokes, and memories that would never fade</div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">High School</div>
+            <div class="timeline-title">The Best Years</div>
+            <div class="timeline-desc">Adventures, celebrations, and realizing you're my person</div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">Today</div>
+            <div class="timeline-title">Your 17th Birthday</div>
+            <div class="timeline-desc">Celebrating you and a friendship that means the world to me 💝</div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">Forever</div>
+            <div class="timeline-title">Our Future</div>
+            <div class="timeline-desc">Best friends forever — no matter where life takes us</div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align:center;margin-top:28px">
+        <a class="btn" href="practice.html">← Back to Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
